@@ -15,6 +15,7 @@ possibleChoices.forEach((possibleChoice) =>
     userChoice = e.target.id;
     userCoiceDisplay.innerHTML = userChoice;
     generateComputerChoice();
+    getResult();
   })
 );
 
@@ -22,13 +23,13 @@ function generateComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3) + 1; // or you can user possibleChoices.length
 
   if (randomNumber === 1) {
-    copmuterCoice = "rock";
+    copmuterCoice = ROCK_KEY;
   }
   if (randomNumber === 2) {
-    copmuterCoice = "paper";
+    copmuterCoice = PAPER_KEY;
   }
   if (randomNumber === 3) {
-    copmuterCoice = "scissors";
+    copmuterCoice = SCISSORS_KEY;
   }
   copmuterCoiceDisplay.innerHTML = copmuterCoice;
 }
@@ -36,11 +37,14 @@ function generateComputerChoice() {
 function getResult() {
   if (copmuterCoice === userChoice) {
     result = "its a draw!";
-  }
-  if (copmuterCoice === ROCK_KEY && userChoice === PAPER_KEY) {
+  } else if (copmuterCoice === SCISSORS_KEY && userChoice === PAPER_KEY) {
+    result = "you lose :( ";
+  } else if (copmuterCoice === ROCK_KEY && userChoice === SCISSORS_KEY) {
+    result = "you lose :( ";
+  } else if (copmuterCoice === PAPER_KEY && userChoice === ROCK_KEY) {
+    result = "you lose :( ";
+  } else {
     result = "you win!";
   }
-  if (copmuterCoice === ROCK_KEY && userChoice === SCISSORS_KEY) {
-    result = "you lose :( ";
-  }
+  resultDisplay.innerHTML = result;
 }
